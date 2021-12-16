@@ -551,7 +551,7 @@ code {
     width: 240px;
     -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
-    background: rgb(10, 10, 10);
+    background: #1a374d;
     position: absolute;
     z-index: 99;
 }
@@ -695,7 +695,7 @@ body.fixed-left .side-menu.left {
 }
 
 #sidebar-menu {
-    background-color: rgba(8, 189, 8, 0.603);
+    background-color: #1a374d;
     padding-bottom: 50px;
     width: 100%;
 }
@@ -734,8 +734,8 @@ body.fixed-left .side-menu.left {
 #sidebar-menu > ul > li > a {
     color: rgba(255, 255, 255, 0.5);
     display: block;
-    padding: 12px 20px;
-    background-color: rgba(27, 30, 218, 0.39);
+    padding: 18px 20px;
+    background-color: #406882;
 }
 
 #sidebar-menu > ul > li > a:hover {
@@ -753,12 +753,13 @@ body.fixed-left .side-menu.left {
 }
 
 #sidebar-menu > ul > li.nav-active > a {
-    background-color: #222d32;
+    background-color: #6998ab;
     color: rgba(255, 255, 255, 0.8);
 }
 
 #sidebar-menu > ul > li > a > span {
     vertical-align: middle;
+    font-size: 18px;
 }
 
 #sidebar-menu > ul > li > a > i {
@@ -2337,6 +2338,88 @@ dt {
 .card-blue-grey {
     background-color: #90a4ae;
     border-color: #90a4ae;
+}
+
+.number-card-number {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #fff;
+    font-weight: 300;
+}
+
+.card-create {
+    padding: 30px 40px;
+    margin-top: 40px;
+    margin-left: 40px;
+    width: 900px;
+    margin-bottom: 60px;
+    border: none !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-password {
+    padding: 30px 40px;
+    margin-top: 40px;
+    margin-left: 20%;
+    width: 700px;
+    margin-bottom: 60px;
+    border: none !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form-label {
+    font-size: 18px;
+}
+
+.number-card {
+    padding: 32px 40px;
+    border-radius: 8px;
+    width: 300px;
+    height: 140px;
+    margin-right: 4%;
+    margin-bottom: 12%;
+    background-image: -webkit-linear-gradient(270deg, #406882, #406882);
+    background-image: linear-gradient(180deg, #406882, #406882);
+}
+
+.number-card.number-card-content {
+    background-image: -webkit-linear-gradient(270deg, #406882, #6998ab);
+    background-image: linear-gradient(180deg, #406882, #6998ab);
+}
+
+.number-card-progress-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.number-card-dollars {
+    color: hsla(0, 0%, 100%, 0.8);
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.number-card-dollars:hover {
+    color: #ffffff;
+}
+
+.number-card-progress {
+    color: #fff;
+    text-align: right;
+}
+
+.col-right {
+    margin-left: 8%;
+}
+
+#card-icons {
+    font-size: 50px;
+    margin-top: 24%;
 }
 
 @media (min-width: 576px) {
