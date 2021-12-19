@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row">
                 @can('user-list')
-                <div class="col-md-6 col-lg-6 col-xl-3" style="margin-right: 2%;">
+                <div class="col-md-6 col-lg-6 col-xl-3" style="margin-right: 1%;">
                     {{-- <div class="mini-stat widget-chart-sm clearfix bg-white border border-danger">
                         <span class="peity-donut float-left"
                             data-peity='{ "fill": ["#3bc3e9", "#f2f2f2"], "innerRadius": 23, "radius": 32 }'
@@ -75,25 +75,26 @@
             </div>
             <!-- end row -->
             <div class="row">
-                <?php
-                    $dataPoints1 = array(
-                    	array("label"=> "Education", "y"=> 284935),
-                    	array("label"=> "Entertainment", "y"=> 256548),
-                    	array("label"=> "Lifestyle", "y"=> 245214),
-                    	array("label"=> "Business", "y"=> 233464),
-                    	array("label"=> "Music & Audio", "y"=> 200285),
-                    	array("label"=> "Personalization", "y"=> 194422),
-                    	array("label"=> "Tools", "y"=> 180337),
-                    	array("label"=> "Books & Reference", "y"=> 172340),
-                    	array("label"=> "Travel & Local", "y"=> 118187),
-                    	array("label"=> "Puzzle", "y"=> 107530),
-                    );
-                ?>
+              <?php
+ 
+    $dataPoints = array(
+	array("label"=> "Jan", "y"=> array(4, 8)),
+	array("label"=> "Feb", "y"=> array(3, 8)),
+	array("label"=> "Mar", "y"=> array(5, 11)),
+	array("label"=> "Apr", "y"=> array(8, 18)),
+	array("label"=> "May", "y"=> array(12, 20)),
+	array("label"=> "Jun", "y"=> array(17, 26)),
+	array("label"=> "Jul", "y"=> array(19, 28)),
+	array("label"=> "Aug", "y"=> array(19, 28)),
+	array("label"=> "Sep", "y"=> array(16, 25)),
+	array("label"=> "Oct", "y"=> array(12, 19)),
+	array("label"=> "Nov", "y"=> array(9, 14)),
+	array("label"=> "Dec", "y"=> array(6, 10))
+    );
+	
+   ?>
 
-                <div id="chartContainer" style="height: 420px; width: 60%;"></div>
-
-
-                <div id="pieContainer" style="height: 370px; width: 100%;"></div>
+                <div id="chartContainer" style="height: 420px; width: 60%; margin-left: 14px;"></div>
 
             </div>
         </div><!-- container -->
@@ -111,23 +112,66 @@
     <script src="{{ URL::asset('assets/pages/dashborad-2.js') }}"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script>
-        window.onload = function () {
-                        var chart = new CanvasJS.Chart("chartContainer", {
-                        	animationEnabled: true,
-                        	theme: "light2", // "light1", "light2", "dark1", "dark2"
-                        	title: {
-                        		text: "Top 10 Google Play Categories - till 2017"
-                        	},
-                        	axisY: {
-                        		title: "Number of Apps"
-                        	},
-                        	data: [{
-                        		type: "column",
-                        		dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
-                        	}]
-                        });
-                        chart.render();
-                        }
-    //
-    </script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	//theme: "light2",
+	title: {
+		text: "Temperature Variation of Istanbul Over a Year"
+	},
+	axisY: {
+		title: "Temperature (in °C)"
+	},
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		dockInsidePlotArea: true,
+		cursor: "pointer",
+		itemclick: toggleDataSeries
+	},
+	data: [{
+		type: "rangeArea",
+		markerSize: 0,
+		name: "Temperature Range",
+		showInLegend: true,
+		toolTipContent: "{label}<br><span style=\"color:#6D77AC\">{name}</span><br>Min: {y[1]} °C<br>Max: {y[0]} °C",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+addAverages();
+ 
+function addAverages() {
+	var dps = [];
+	for(var i = 0; i < chart.options.data[0].dataPoints.length; i++) {
+		dps.push({
+			label: chart.options.data[0].dataPoints[i].label,
+			y: (chart.options.data[0].dataPoints[i].y[0] + chart.options.data[0].dataPoints[i].y[1]) / 2
+		});
+	}
+	chart.options.data.push({
+		type: "line",
+		name: "Average",
+		showInLegend: true,
+		markerType: "triangle",
+		markerSize: 0,
+		yValueFormatString: "##.0 °C",
+		dataPoints: dps
+	});
+	chart.render();
+}
+ 
+function toggleDataSeries(e) {
+	if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	} else {
+		e.dataSeries.visible = true;
+	}
+	e.chart.render();
+}
+ 
+}
+</script>
     @endsection
